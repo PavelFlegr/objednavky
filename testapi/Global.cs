@@ -8,8 +8,9 @@ using RestSharp;
 
 namespace testapi
 {
-    class Cookies
+    static class Global
     {
         public static RestClient client;
+        public static string username;
     }
 }

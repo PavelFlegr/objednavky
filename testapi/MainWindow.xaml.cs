@@ -22,14 +22,23 @@ namespace testapi
     {
         public MainWindow()
         {
-            Cookies.client = new RestSharp.RestClient("http://pavelflegr.8u.cz/eshop/");
-            Cookies.client.CookieContainer = new System.Net.CookieContainer();
+            Global.client = new RestSharp.RestClient("http://pavelflegr.8u.cz/eshop/");
+            Global.client.CookieContainer = new System.Net.CookieContainer();
+            Initialized += Login;
+            Hide();
             InitializeComponent();
+            
+        }
+
+        private void Login(object sender, EventArgs e)
+        {
+            var window = new LoginWindow();
+            window.Show();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            navigation.Navigate(new Login());
+            navigation.Navigate(new Profile());
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

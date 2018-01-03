@@ -12,26 +12,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using RestSharp;
 
 namespace testapi
 {
     /// <summary>
-    /// Interakční logika pro Login.xaml
+    /// Interaction logic for Profile.xaml
     /// </summary>
-    public partial class Login : Page
+    public partial class Profile : Page
     {
-        public Login()
+        public Profile()
         {
             InitializeComponent();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var request = new RestRequest("login", Method.POST);
-            request.AddParameter("mail", username.Text);
-            request.AddParameter("password", password.Password);
-            var response = Global.client.Execute(request);
+            name.Text = Global.username;
         }
     }
 }

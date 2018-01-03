@@ -24,9 +24,9 @@ namespace testapi
         public Orders()
         {
             InitializeComponent();
-            var response1 = Cookies.client.Execute<List<Item>>(new RestRequest("items"));
+            var response1 = Global.client.Execute<List<Item>>(new RestRequest("items"));
             var items = response1.Data;
-            var response2 = Cookies.client.Execute<List<Order>>(new RestRequest("orders"));
+            var response2 = Global.client.Execute<List<Order>>(new RestRequest("orders"));
             var o = new List<object>();
             foreach(var order in response2.Data)
             {

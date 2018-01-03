@@ -25,7 +25,7 @@ namespace testapi
         public Items()
         {
             InitializeComponent();
-            var response = Cookies.client.Execute<List<Item>>(new RestRequest("items"));
+            var response = Global.client.Execute<List<Item>>(new RestRequest("items"));
             items.ItemsSource = response.Data;
         }
 
@@ -46,7 +46,7 @@ namespace testapi
             var list = selected.Select(item => new { id = item.id, amount = 1 }).ToList();
             var request = new RestRequest(uri, Method.POST);
             request.AddJsonBody(list);
-            Cookies.client.Execute(request);
+            Global.client.Execute(request);
         }
     }
 }
