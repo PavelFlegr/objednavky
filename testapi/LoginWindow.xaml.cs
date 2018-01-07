@@ -55,5 +55,23 @@ namespace testapi
                 Application.Current.MainWindow.Show();
             }
         }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var request = new RestRequest("register", Method.POST);
+            request.AddParameter("mail", username.Text);
+            request.AddParameter("password", password.Password);
+            var response = Global.client.Execute<bool>(request);
+            if (!response.Data)
+            {
+                MessageBox.Show("Účet s tímto přihlašovacím jménem už existuje");
+            }
+            else
+            {
+                Global.username = username.Text;
+                success = true;
+                Close();
+            }
+        }
     }
 }

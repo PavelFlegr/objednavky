@@ -21,12 +21,27 @@ namespace testapi
     /// </summary>
     public partial class Items : Page
     {
+        public List<ItemVM> itemList { get; set; }
+        public bool enabled { get; set; } = true;
         int id = 0;
         public Items()
         {
             InitializeComponent();
+            this.Loaded += Items_Loaded;
             var response = Global.client.Execute<List<Item>>(new RestRequest("items"));
-            items.ItemsSource = response.Data;
+            itemList = response.Data.Select(item => new ItemVM(item)).ToList();
+        }
+
+        private void Items_Loaded(object sender, RoutedEventArgs e)
+        {
+            items.ItemsSource = itemList;
+        }
+
+        public Items(Order order) : this()
+        {
+            text.Visibility = Visibility.Hidden;
+            enabled = false;
+            itemList = order.items.Join(itemList, item1 => item1.id, item2 => item2.item.id, (item1, item2) => new ItemVM(item2.item, item1.amount)).ToList();
         }
 
         public Items(int id) : this()
@@ -42,11 +57,16 @@ namespace testapi
             {
                 uri += "/" + id.ToString();
             }
-            var selected = items.SelectedItems.Cast<Item>().ToList();
-            var list = selected.Select(item => new { id = item.id, amount = 1 }).ToList();
+            var list = itemList.Where(item => item.amount > 0).Select(item => new { id = item.item.id, amount = item.amount }).ToList();
+            if(list.Count == 0)
+            {
+                MessageBox.Show("Vyberte alespoň 1 položku");
+                return;
+            }
             var request = new RestRequest(uri, Method.POST);
             request.AddJsonBody(list);
             Global.client.Execute(request);
+            MainWindow.window.navigation.Navigate(new Orders());
         }
     }
 }

@@ -28,23 +28,8 @@ namespace testapi
             var items = response1.Data;
             var response2 = Global.client.Execute<List<Order>>(new RestRequest("orders"));
             var o = new List<object>();
-            foreach(var order in response2.Data)
-            {
-                StringBuilder sb = new StringBuilder();
-                foreach (var item in order.items)
-                {
-                    sb.Append(items.First(i => i.id == item.id).name);
-                    sb.Append(", ");
-                }
-                var text = sb.ToString();
-                if (text.Length > 0)
-                {
-                    text = text.Substring(0, text.Length - 2);
-                }
-                o.Add(new OrderItem2{ text = text, id = order.id });
-            }
 
-            orders.ItemsSource = o;
+            orders.ItemsSource = response2.Data;
 
 
         }
@@ -52,8 +37,8 @@ namespace testapi
         private void ListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var item = sender as ListBoxItem;
-            var orderItem = item.DataContext as OrderItem2;
-            ((MainWindow)Application.Current.MainWindow).Modify(orderItem.id);
+            var order = item.DataContext as Order;
+            MainWindow.window.navigation.Navigate(new Items(order));
         }
     }
 }

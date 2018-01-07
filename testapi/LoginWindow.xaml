@@ -14,7 +14,10 @@
             <TextBox x:Name="username" Grid.Column="1"></TextBox>
             <Label Grid.Row="1">Password</Label>
             <PasswordBox x:Name="password" Grid.Row="1" Grid.Column="1"></PasswordBox>
-            <Button Grid.Row="2" Grid.ColumnSpan="3" HorizontalAlignment="Center" Click="Button_Click">Login</Button>
+            <DockPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" LastChildFill="False">
+                <Button DockPanel.Dock="Left" Click="Button_Click">Login</Button>
+                <Button DockPanel.Dock="Right" Click="Button_Click_1">Register</Button>
+            </DockPanel>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"></ColumnDefinition>
                 <ColumnDefinition Width="150"></ColumnDefinition>

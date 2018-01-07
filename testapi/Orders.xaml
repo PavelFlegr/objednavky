@@ -7,17 +7,26 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="Orders">
-
-    <ListBox x:Name="orders">
-        <ListBox.ItemTemplate>
-            <DataTemplate>
-                <TextBlock Text="{Binding text}"></TextBlock>
-            </DataTemplate>
-        </ListBox.ItemTemplate>
-        <ListBox.ItemContainerStyle>
-            <Style TargetType="ListBoxItem">
+    <ListView x:Name="orders">
+        <ListView.View>
+            <GridView>
+                <GridViewColumn Header="Datum" DisplayMemberBinding="{Binding order_date}"></GridViewColumn>
+                <GridViewColumn Header="Cena" DisplayMemberBinding="{Binding price}"></GridViewColumn>
+                <GridViewColumn Header="Položek" DisplayMemberBinding="{Binding count}"></GridViewColumn>
+                <GridViewColumn>
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding HideCommand}">Skrýt objednávku</Button>
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+            </GridView>
+        </ListView.View>
+        <ListView.ItemContainerStyle>
+            <Style TargetType="ListViewItem">
                 <EventSetter Event="MouseDoubleClick" Handler="ListBoxItem_MouseDoubleClick"></EventSetter>
             </Style>
-        </ListBox.ItemContainerStyle>
-    </ListBox>
+        </ListView.ItemContainerStyle>
+    </ListView>
+    
 </Page>

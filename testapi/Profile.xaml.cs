@@ -25,5 +25,11 @@ namespace testapi
             InitializeComponent();
             name.Text = Global.username;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow.window.Login();
+            MainWindow.window.navigation.Navigate(new Items());
+        }
     }
 }

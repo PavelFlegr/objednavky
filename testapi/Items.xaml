@@ -6,16 +6,28 @@
       xmlns:local="clr-namespace:testapi"
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
+      xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
       Title="Items">
-
     <Grid>
         <ListView x:Name="items">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Název" DisplayMemberBinding="{Binding name}"></GridViewColumn>
-                    <GridViewColumn Header="Cena" DisplayMemberBinding="{Binding price}"></GridViewColumn>
+                    <GridViewColumn Header="Název" DisplayMemberBinding="{Binding item.name}"></GridViewColumn>
+                    <GridViewColumn Header="Cena" DisplayMemberBinding="{Binding item.price}"></GridViewColumn>
+                    <GridViewColumn Header="Počet">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <xctk:IntegerUpDown Minimum="0" Value="{Binding amount}"></xctk:IntegerUpDown>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
                 </GridView>
             </ListView.View>
+            <ListView.Resources>
+                <Style TargetType="xctk:IntegerUpDown">
+                    <Setter Property="IsEnabled" Value="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Page}}, Path=enabled}"></Setter>
+                </Style>
+            </ListView.Resources>
         </ListView>
         <Button x:Name="text" Grid.Row="1" Click="Button_Click">Objednat</Button>
         <Grid.RowDefinitions>

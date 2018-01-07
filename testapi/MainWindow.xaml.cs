@@ -20,18 +20,25 @@ namespace testapi
     /// </summary>
     public partial class MainWindow : Window
     {
+        public static MainWindow window;
         public MainWindow()
         {
+            window = this;
             Global.client = new RestSharp.RestClient("http://pavelflegr.8u.cz/eshop/");
             Global.client.CookieContainer = new System.Net.CookieContainer();
-            Initialized += Login;
-            Hide();
+            Initialized += LoginEvent;
             InitializeComponent();
             
         }
 
-        private void Login(object sender, EventArgs e)
+        private void LoginEvent(object sender, EventArgs e)
         {
+            Login();
+        }
+
+        public void Login()
+        {
+            Hide();
             var window = new LoginWindow();
             window.Show();
         }
