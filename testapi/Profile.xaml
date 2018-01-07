@@ -13,6 +13,19 @@
             <TextBlock Margin="0,0,5,0">Přihlašovací jméno:</TextBlock>
             <TextBlock x:Name="name"></TextBlock>
         </StackPanel>
-        <Button HorizontalAlignment="Left" Click="Button_Click">Logout</Button>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Margin="0,0,5,0">Ulice:</TextBlock>
+            <TextBox MinWidth="100" x:Name="ulice"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Margin="0,0,5,0">Poštovní směrovací číslo:</TextBlock>
+            <TextBox MinWidth="100" x:Name="psc"></TextBox>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <TextBlock Margin="0,0,5,0">Číslo popisné:</TextBlock>
+            <TextBox MinWidth="100" x:Name="cp"></TextBox>
+        </StackPanel>
+        <Button HorizontalAlignment="Left" Click="Button_Click_1">Uložit</Button>
+        <Button HorizontalAlignment="Left" Click="Button_Click">Odhlásit se</Button>
     </StackPanel>
 </Page>

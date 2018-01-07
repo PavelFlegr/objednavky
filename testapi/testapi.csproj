@@ -80,6 +80,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="UserInfo.cs" />
     <Page Include="Items.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
