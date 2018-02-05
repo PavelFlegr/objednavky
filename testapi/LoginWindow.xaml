@@ -11,12 +11,12 @@
         <Image Source="lock.png" Width="100"></Image>
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="214">
             <Label>Username</Label>
-            <TextBox x:Name="username" Grid.Column="1"></TextBox>
+            <TextBox x:Name="username" Grid.Column="1" KeyDown="EnterPressed"></TextBox>
             <Label Grid.Row="1">Password</Label>
-            <PasswordBox x:Name="password" Grid.Row="1" Grid.Column="1"></PasswordBox>
+            <PasswordBox x:Name="password" Grid.Row="1" Grid.Column="1" KeyDown="EnterPressed"></PasswordBox>
             <DockPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" LastChildFill="False">
-                <Button DockPanel.Dock="Left" Click="Button_Click">Login</Button>
-                <Button DockPanel.Dock="Right" Click="Button_Click_1">Register</Button>
+                <Button DockPanel.Dock="Left" Click="Login">Login</Button>
+                <Button DockPanel.Dock="Right" Click="Register">Register</Button>
             </DockPanel>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="auto"></ColumnDefinition>

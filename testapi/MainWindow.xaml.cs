@@ -43,19 +43,24 @@ namespace testapi
             window.Show();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void ShowProfile(object sender, RoutedEventArgs e)
         {
             navigation.Navigate(new Profile());
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void ShowOrders(object sender, RoutedEventArgs e)
         {
             navigation.Navigate(new Orders());
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        private void ShowItems(object sender, RoutedEventArgs e)
         {
             navigation.Navigate(new Items());
+        }
+
+        private void ShowCart(object sender, RoutedEventArgs e)
+        {
+            navigation.Navigate(new CartPage());
         }
 
         public void Modify(int id)

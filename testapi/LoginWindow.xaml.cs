@@ -26,9 +26,14 @@ namespace testapi
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Login(object sender, RoutedEventArgs e)
         {
             var request = new RestRequest("login", Method.POST);
+            if (string.IsNullOrWhiteSpace(username.Text) || string.IsNullOrWhiteSpace(password.Password))
+            {
+                MessageBox.Show("Žádné pole nesmí být prázdné");
+                return;
+            }
             request.AddParameter("mail", username.Text);
             request.AddParameter("password", password.Password);
             var response = Global.client.Execute<bool>(request);
@@ -48,17 +53,22 @@ namespace testapi
         {
             if(!success)
             {
-                Application.Current.MainWindow.Close();
+                MainWindow.window.Close();
             }
             else
             {
-                Application.Current.MainWindow.Show();
+                MainWindow.window.Show();
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Register(object sender, RoutedEventArgs e)
         {
             var request = new RestRequest("register", Method.POST);
+            if (string.IsNullOrWhiteSpace(username.Text) || string.IsNullOrWhiteSpace(password.Password))
+            {
+                MessageBox.Show("Žádné pole nesmí být prázdné");
+                return;
+            }
             request.AddParameter("mail", username.Text);
             request.AddParameter("password", password.Password);
             var response = Global.client.Execute<bool>(request);
@@ -68,10 +78,20 @@ namespace testapi
             }
             else
             {
+                request = new RestRequest("login", Method.POST);
+                request.AddParameter("mail", username.Text);
+                request.AddParameter("password", password.Password);
+                Global.client.Execute(request);
                 Global.username = username.Text;
                 success = true;
                 Close();
             }
+        }
+
+        private void EnterPressed(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+                Login(null, null);
         }
     }
 }

@@ -40,5 +40,10 @@ namespace testapi
             var order = item.DataContext as Order;
             MainWindow.window.navigation.Navigate(new Items(order));
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            e.Handled = true;
+        }
     }
 }

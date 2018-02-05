@@ -8,9 +8,10 @@
         Title="MainWindow" Height="350" Width="525">
     <Grid>
         <StackPanel Orientation="Horizontal">
-            <Button Click="Button_Click_2">Zboží</Button>
-            <Button Click="Button_Click_1">Objednávky</Button>
-            <Button Click="Button_Click">Profil</Button>
+            <Button Click="ShowItems">Zboží</Button>
+            <Button Click="ShowOrders">Objednávky</Button>
+            <Button Click="ShowProfile">Profil</Button>
+            <Button Click="ShowCart">Košík</Button>
             <StackPanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Padding" Value="4,1"></Setter>

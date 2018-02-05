@@ -16,7 +16,7 @@
                 <GridViewColumn>
                     <GridViewColumn.CellTemplate>
                         <DataTemplate>
-                            <Button Command="{Binding HideCommand}">Skrýt objednávku</Button>
+                            <Button Command="{Binding HideCommand}" Click="Button_Click">Skrýt objednávku</Button>
                         </DataTemplate>
                     </GridViewColumn.CellTemplate>
                 </GridViewColumn>
