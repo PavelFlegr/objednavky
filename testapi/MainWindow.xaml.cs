@@ -40,7 +40,8 @@ namespace testapi
         {
             Hide();
             var window = new LoginWindow();
-            window.Show();
+            window.ShowDialog();
+            MainWindow.window.navigation.Navigate(new Items());
         }
 
         private void ShowProfile(object sender, RoutedEventArgs e)
@@ -61,11 +62,6 @@ namespace testapi
         private void ShowCart(object sender, RoutedEventArgs e)
         {
             navigation.Navigate(new CartPage());
-        }
-
-        public void Modify(int id)
-        {
-            navigation.Navigate(new Items(id));
         }
     }
 }

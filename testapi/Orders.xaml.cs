@@ -30,15 +30,13 @@ namespace testapi
             var o = new List<object>();
 
             orders.ItemsSource = response2.Data;
-
-
         }
 
         private void ListBoxItem_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             var item = sender as ListBoxItem;
             var order = item.DataContext as Order;
-            MainWindow.window.navigation.Navigate(new Items(order));
+            MainWindow.window.navigation.Navigate(new CartPage(order));
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

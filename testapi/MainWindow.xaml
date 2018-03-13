@@ -18,7 +18,7 @@
                 </Style>
             </StackPanel.Resources>
         </StackPanel>
-        <Frame x:Name="navigation" Grid.Row="1"  Source="Items.xaml" NavigationUIVisibility="Hidden"></Frame>
+        <Frame x:Name="navigation" Grid.Row="1" NavigationUIVisibility="Hidden"></Frame>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>

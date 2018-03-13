@@ -21,7 +21,7 @@ namespace testapi
     /// </summary>
     public partial class Items : Page
     {
-        public List<ItemVM> itemList { get; set; }
+        public List<Item> itemList { get; set; }
         public bool enabled { get; set; } = true;
         int id = 0;
         public Items()
@@ -29,7 +29,7 @@ namespace testapi
             InitializeComponent();
             this.Loaded += Items_Loaded;
             var response = Global.client.Execute<List<Item>>(new RestRequest("items"));
-            itemList = response.Data.Select(item => new ItemVM(item)).ToList();
+            itemList = response.Data;
         }
 
         private void Items_Loaded(object sender, RoutedEventArgs e)
@@ -37,36 +37,16 @@ namespace testapi
             items.ItemsSource = itemList;
         }
 
-        public Items(Order order) : this()
+        private void Item_Description(object sender, MouseButtonEventArgs e)
         {
-            text.Visibility = Visibility.Hidden;
-            enabled = false;
-            itemList = order.items.Join(itemList, item1 => item1.id, item2 => item2.item.id, (item1, item2) => new ItemVM(item2.item, item1.amount)).ToList();
+            var view = sender as ListView;
+            var item = view.SelectedItem as Item;
+            MainWindow.window.navigation.Navigate(new ItemPage(new CartItem(item)));
         }
 
-        public Items(int id) : this()
+        private void Prevent_Description(object sender, MouseButtonEventArgs e)
         {
-            this.id = id;
-            text.Content = "Změnit";
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            var uri = "orders";
-            if (id != 0)
-            {
-                uri += "/" + id.ToString();
-            }
-            var list = itemList.Where(item => item.amount > 0).Select(item => new { id = item.item.id, amount = item.amount }).ToList();
-            if(list.Count == 0)
-            {
-                MessageBox.Show("Vyberte alespoň 1 položku");
-                return;
-            }
-            var request = new RestRequest(uri, Method.POST);
-            request.AddJsonBody(list);
-            Global.client.Execute(request);
-            MainWindow.window.navigation.Navigate(new Orders());
+            e.Handled = true;
         }
     }
 }

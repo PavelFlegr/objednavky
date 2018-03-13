@@ -11,6 +11,6 @@
 
     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" VerticalAlignment="Top">
         <TextBlock>V kjošíku: </TextBlock>
-        <xctk:IntegerUpDown Minimum="1" Value="{Binding quantity}"></xctk:IntegerUpDown>
+        <xctk:IntegerUpDown Minimum="0" ValueChanged="Update_Quantity" Value="{Binding quantity}"></xctk:IntegerUpDown>
     </StackPanel>
 </Page>
