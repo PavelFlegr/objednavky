@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using SQLite;
 
 namespace testapi
 {
@@ -26,7 +27,7 @@ namespace testapi
             window = this;
             Global.client = new RestSharp.RestClient("http://pavelflegr.8u.cz/eshop/");
             Global.client.CookieContainer = new System.Net.CookieContainer();
-            Initialized += LoginEvent;
+            //Initialized += LoginEvent;
             InitializeComponent();
             
         }

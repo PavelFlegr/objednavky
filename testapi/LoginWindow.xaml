@@ -8,6 +8,7 @@
         Closing="Window_Closing"
         Title="LoginWindow" Height="300" Width="300">
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock x:Name="offlineIndicator" Visibility="Hidden" Foreground="Red" HorizontalAlignment="Center">Offline režim</TextBlock>
         <Image Source="lock.png" Width="100"></Image>
         <Grid HorizontalAlignment="Center" VerticalAlignment="Center" Width="214">
             <Label>Username</Label>

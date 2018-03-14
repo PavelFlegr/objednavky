@@ -24,6 +24,12 @@ namespace testapi
         public LoginWindow()
         {
             InitializeComponent();
+            var request = new RestRequest("", Method.GET);
+            if(Global.client.Get(request).ResponseStatus == ResponseStatus.Error)
+            {
+                Global.offline = true;
+                offlineIndicator.Visibility = Visibility.Visible;
+            }
         }
 
         private void Login(object sender, RoutedEventArgs e)
@@ -84,7 +90,6 @@ namespace testapi
                 Global.client.Execute(request);
                 Global.username = username.Text;
                 success = true;
-                Close();
             }
         }
 

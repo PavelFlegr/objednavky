@@ -12,5 +12,6 @@ namespace testapi
     {
         public static RestClient client;
         public static string username;
+        public static bool offline;
     }
 }

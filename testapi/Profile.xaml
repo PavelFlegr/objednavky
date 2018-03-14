@@ -7,25 +7,46 @@
       mc:Ignorable="d" 
       d:DesignHeight="300" d:DesignWidth="300"
       Title="Profile">
-
     <StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Margin="0,0,5,0">Přihlašovací jméno:</TextBlock>
-            <TextBlock x:Name="name"></TextBlock>
+        <StackPanel x:Name="profile" Visibility="Collapsed">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="0,0,5,0">Přihlašovací jméno:</TextBlock>
+                <TextBlock x:Name="name"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="0,0,5,0">Ulice:</TextBlock>
+                <TextBox MinWidth="100" x:Name="ulice"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="0,0,5,0">Poštovní směrovací číslo:</TextBlock>
+                <TextBox MinWidth="100" x:Name="psc"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Margin="0,0,5,0">Číslo popisné:</TextBlock>
+                <TextBox MinWidth="100" x:Name="cp"></TextBox>
+            </StackPanel>
+            <Button HorizontalAlignment="Left" Click="Button_Click_1">Uložit</Button>
+            <Button HorizontalAlignment="Left" Click="Button_Click">Odhlásit se</Button>
         </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Margin="0,0,5,0">Ulice:</TextBlock>
-            <TextBox MinWidth="100" x:Name="ulice"></TextBox>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Margin="0,0,5,0">Poštovní směrovací číslo:</TextBlock>
-            <TextBox MinWidth="100" x:Name="psc"></TextBox>
-        </StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <TextBlock Margin="0,0,5,0">Číslo popisné:</TextBlock>
-            <TextBox MinWidth="100" x:Name="cp"></TextBox>
-        </StackPanel>
-        <Button HorizontalAlignment="Left" Click="Button_Click_1">Uložit</Button>
-        <Button HorizontalAlignment="Left" Click="Button_Click">Odhlásit se</Button>
+        <Grid x:Name="login" HorizontalAlignment="Center" VerticalAlignment="Center" Width="214">
+            <Label>Username</Label>
+            <TextBox x:Name="username" Grid.Column="1" KeyDown="EnterPressed"></TextBox>
+            <Label Grid.Row="1">Password</Label>
+            <PasswordBox x:Name="password" Grid.Row="1" Grid.Column="1" KeyDown="EnterPressed"></PasswordBox>
+            <DockPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" LastChildFill="False">
+                <Button DockPanel.Dock="Left" Click="Login">Login</Button>
+                <Button DockPanel.Dock="Right" Click="Register">Register</Button>
+            </DockPanel>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"></ColumnDefinition>
+                <ColumnDefinition Width="150"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition Height="auto"></RowDefinition>
+            </Grid.RowDefinitions>
+        </Grid>
     </StackPanel>
+    
 </Page>
