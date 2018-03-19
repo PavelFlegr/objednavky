@@ -9,9 +9,10 @@
     <Grid>
         <StackPanel Orientation="Horizontal">
             <Button Click="ShowItems">Zboží</Button>
-            <Button Click="ShowOrders">Objednávky</Button>
-            <Button Click="ShowProfile">Profil</Button>
-            <Button Click="ShowCart">Košík</Button>
+            <Button x:Name="orderButton" Click="ShowOrders">Objednávky</Button>
+            <Button x:Name="profileButton" Click="ShowProfile">Profil</Button>
+            <Button x:Name="cartButton" Click="ShowCart">Košík</Button>
+            <TextBlock x:Name="offlineIndicator" Visibility="Collapsed" Foreground="Red">Offline</TextBlock>
             <StackPanel.Resources>
                 <Style TargetType="Button">
                     <Setter Property="Padding" Value="4,1"></Setter>

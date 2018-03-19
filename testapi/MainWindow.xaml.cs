@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using SQLite;
+using RestSharp;
 
 namespace testapi
 {
@@ -21,28 +22,72 @@ namespace testapi
     /// </summary>
     public partial class MainWindow : Window
     {
+        public SQLiteConnection sql;
         public static MainWindow window;
         public MainWindow()
         {
             window = this;
-            Global.client = new RestSharp.RestClient("http://pavelflegr.8u.cz/eshop/");
+            Global.client = new RestClient("http://pavelflegr.8u.cz/eshop/");
             Global.client.CookieContainer = new System.Net.CookieContainer();
-            //Initialized += LoginEvent;
             InitializeComponent();
+            CheckIfOffline();
+            if (Global.username == null)
+            {
+                SetAnonymousMode();
+            }
+            if (Global.offline)
+            {
+                SetOfflineMode();
+            }
+            else
+            {
+                UpdateDB();
+            }
             
+            navigation.Navigate(new Items());
         }
 
-        private void LoginEvent(object sender, EventArgs e)
+        void CheckIfOffline()
         {
-            Login();
+            var request = new RestRequest("", Method.GET);
+            if (Global.client.Get(request).ResponseStatus == ResponseStatus.Error)
+            {
+                Global.offline = true;
+
+            }
         }
 
-        public void Login()
+        void UpdateDB()
         {
-            Hide();
-            var window = new LoginWindow();
-            window.ShowDialog();
-            MainWindow.window.navigation.Navigate(new Items());
+            sql = new SQLiteConnection("db");
+            var response = Global.client.Execute<List<Item>>(new RestRequest("items"));
+            List<Item> items = response.Data;
+            sql.DropTable<Item>();
+            sql.CreateTable<Item>();
+            sql.InsertAll(items);
+        }
+
+        public void SetOfflineMode()
+        {
+            offlineIndicator.Visibility = Visibility.Visible;
+            profileButton.IsEnabled = false;
+            orderButton.IsEnabled = false;
+            cartButton.IsEnabled = false;
+        }
+
+        public void SetAnonymousMode()
+        {
+            offlineIndicator.Visibility = Visibility.Collapsed;
+            profileButton.IsEnabled = true;
+            orderButton.IsEnabled = false;
+            cartButton.IsEnabled = false;
+        }
+        public void SetLoggedMode()
+        {
+            offlineIndicator.Visibility = Visibility.Collapsed;
+            profileButton.IsEnabled = true;
+            orderButton.IsEnabled = true;
+            cartButton.IsEnabled = true;
         }
 
         private void ShowProfile(object sender, RoutedEventArgs e)

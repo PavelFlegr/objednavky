@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using RestSharp;
+using SQLite;
 
 namespace testapi
 {
@@ -28,8 +29,22 @@ namespace testapi
         {
             InitializeComponent();
             this.Loaded += Items_Loaded;
-            var response = Global.client.Execute<List<Item>>(new RestRequest("items"));
-            itemList = response.Data;
+            GetItems();
+        }
+
+        void GetItems()
+        {
+            if(Global.offline)
+            {
+                var sql = new SQLiteConnection("db");
+                sql.CreateTable<Item>();
+                itemList = sql.Table<Item>().ToList();
+            }
+            else
+            {
+                var response = Global.client.Execute<List<Item>>(new RestRequest("items"));
+                itemList = response.Data;
+            }
         }
 
         private void Items_Loaded(object sender, RoutedEventArgs e)

@@ -23,11 +23,25 @@ namespace testapi
     {
         public CartItem item => DataContext as CartItem;
         public ItemPage(CartItem item)
-        {
+        {    
             var response = Global.client.Execute<int>(new RestRequest("cart/"+item.item.id));
             item.quantity = response.Data;
             DataContext = item;
             InitializeComponent();
+            if (Global.username == null)
+            {
+                cartNum.IsEnabled = false;
+            }
+        }
+        
+        public ItemPage(Item item)
+        {
+            DataContext = item;
+            InitializeComponent();
+            if (Global.username == null)
+            {
+                cartNum.IsEnabled = false;
+            }
         }
 
         private void Update_Quantity(object sender, RoutedPropertyChangedEventArgs<object> e)

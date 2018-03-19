@@ -41,6 +41,7 @@ namespace testapi
         {
             var response = Global.client.Execute(new RestRequest("logout", Method.POST));
             Global.username = null;
+            MainWindow.window.SetAnonymousMode();
             MainWindow.window.navigation.Navigate(new Profile());
         }
 
@@ -71,6 +72,7 @@ namespace testapi
             else
             {
                 Global.username = username.Text;
+                MainWindow.window.SetLoggedMode();
                 MainWindow.window.navigation.Navigate(new Profile());
             }
         }
@@ -95,6 +97,7 @@ namespace testapi
                 request = new RestRequest("login", Method.POST);
                 request.AddParameter("mail", username.Text);
                 request.AddParameter("password", password.Password);
+                MainWindow.window.SetLoggedMode();
                 Global.client.Execute(request);
                 Global.username = username.Text;
             }
